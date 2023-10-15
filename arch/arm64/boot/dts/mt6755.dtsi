@@ -12,6 +12,7 @@
 #include <dt-bindings/mmc/mt6755-msdc.h>
 #include "mt6755-pinfunc.h"
 #include <generated/autoconf.h>
+/include/ "mt6755-casper-via-f1.dts"
 / {
 	model = "MT6755";
 	compatible = "mediatek,MT6755";
