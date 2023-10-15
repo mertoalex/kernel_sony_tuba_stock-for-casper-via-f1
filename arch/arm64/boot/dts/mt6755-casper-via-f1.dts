@@ -1,5 +1,7 @@
 /dts-v1/;
 
+#include "mt6755.dtsi"
+
 / {
 	model = "MT6755";
 	compatible = "mediatek,MT6755";
