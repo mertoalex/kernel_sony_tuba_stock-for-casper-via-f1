@@ -1,0 +1,60 @@
+scripts/Makefile.lib:260:quiet_cmd_dt_S_dtb= DTB     $@
+scripts/Makefile.lib:261:cmd_dt_S_dtb=						\
+scripts/Makefile.lib:264:	echo '.section .dtb.init.rodata,"a"';		\
+scripts/Makefile.lib:266:	echo '.global __dtb_$(*F)_begin';		\
+scripts/Makefile.lib:267:	echo '__dtb_$(*F)_begin:';			\
+scripts/Makefile.lib:269:	echo '__dtb_$(*F)_end:';			\
+scripts/Makefile.lib:270:	echo '.global __dtb_$(*F)_end';			\
+scripts/Makefile.lib:274:$(obj)/%.dtb.S: $(obj)/%.dtb
+scripts/Makefile.lib:275:	$(call cmd,dt_S_dtb)
+scripts/Makefile.lib:282:	$(srctree)/scripts/dtc/dtc_overlay -@ -O dtb -o $@ -b 0 \
+scripts/Makefile.lib:289:	$(objtree)/scripts/dtc/dtc -O dtb -o $@ -b 0 \
+scripts/Makefile.lib:295:$(obj)/%.dtb: $(src)/%.dts FORCE
+scripts/Makefile.lib:303:quiet_cmd_dtb_install =	INSTALL $<
+scripts/Makefile.lib:304:      cmd_dtb_install =	cp $< $(2)
+scripts/Makefile.lib:306:_dtbinst_pre_:
+scripts/Makefile.lib:311:%.dtb_dtbinst_: $(obj)/%.dtb _dtbinst_pre_
+scripts/Makefile.lib:312:	$(call cmd,dtb_install,$(INSTALL_DTBS_PATH))
+scripts/drvgen/drvgen.mk:37:DTB_OVERLAY_IMAGE_TAGERT := $(objtree)/arch/$(SRCARCH)/boot/dts/overlays/dtbo.img
+scripts/drvgen/drvgen.mk:38:$(DTB_OVERLAY_IMAGE_TAGERT) : PRIVATE_DTB_OVERLAY_OBJ:=$(objtree)/arch/$(SRCARCH)/boot/dts/overlays/$(MTK_PROJECT)-overlay.dtb
+scripts/drvgen/drvgen.mk:39:$(DTB_OVERLAY_IMAGE_TAGERT) : PRIVATE_DTB_OVERLAY_HDR:=$(srctree)/scripts/dtbo.cfg
+scripts/drvgen/drvgen.mk:41:$(DTB_OVERLAY_IMAGE_TAGERT) : $(PRIVATE_DTB_OVERLAY_OBJ) dtbs $(PRIVATE_DTB_OVERLAY_HDR) | $(PRIVATE_MKIMAGE_TOOL)
+scripts/drvgen/drvgen.mk:42:	@echo Singing the generated overlay dtbo.
+scripts/drvgen/drvgen.mk:44:.PHONY: dtboimage
+scripts/drvgen/drvgen.mk:45:dtboimage : $(DTB_OVERLAY_IMAGE_TAGERT)
+scripts/dtbo.cfg:1:NAME = dtbo
+scripts/dtc/dtc.c:78:	 "\t\tdtb - device tree blob\n"
+scripts/dtc/dtc.c:83:	 "\t\tdtb - device tree blob\n"
+scripts/dtc/dtc.c:85:	"\n\tBlob version to produce, defaults to %d (for dtb and asm output)", //, DEFAULT_FDT_VERSION);
+scripts/dtc/dtc.c:87:	"\n\ttMake space for <number> reserve map entries (for dtb and asm output)",
+scripts/dtc/dtc.c:218:	else if(streq(inform, "dtb"))
+scripts/dtc/dtc.c:248:	} else if (streq(outform, "dtb")) {
+scripts/dtc/flattree.c:62:	struct data *dtbuf = e;
+scripts/dtc/flattree.c:64:	*dtbuf = data_append_cell(*dtbuf, val);
+scripts/dtc/flattree.c:69:	struct data *dtbuf = e;
+scripts/dtc/flattree.c:74:	*dtbuf = data_append_data(*dtbuf, str, len);
+scripts/dtc/flattree.c:75:	*dtbuf = data_append_byte(*dtbuf, '\0');
+scripts/dtc/flattree.c:80:	struct data *dtbuf = e;
+scripts/dtc/flattree.c:82:	*dtbuf = data_append_align(*dtbuf, a);
+scripts/dtc/flattree.c:87:	struct data *dtbuf = e;
+scripts/dtc/flattree.c:89:	*dtbuf = data_append_data(*dtbuf, d.val, d.len);
+scripts/dtc/flattree.c:375:	struct data dtbuf      = empty_data;
+scripts/dtc/flattree.c:387:	flatten_tree(bi->dt, &bin_emitter, &dtbuf, &strbuf, vi);
+scripts/dtc/flattree.c:388:	bin_emit_cell(&dtbuf, FDT_END);
+scripts/dtc/flattree.c:393:	make_fdt_header(&fdt, vi, reservebuf.len, dtbuf.len, strbuf.len,
+scripts/dtc/flattree.c:425:	blob = data_merge(blob, dtbuf);
+scripts/dtc/flattree.c:678:static struct property *flat_read_property(struct inbuf *dtbuf,
+scripts/dtc/flattree.c:685:	proplen = flat_read_word(dtbuf);
+scripts/dtc/flattree.c:686:	stroff = flat_read_word(dtbuf);
+scripts/dtc/flattree.c:691:		flat_realign(dtbuf, 8);
+scripts/dtc/flattree.c:693:	val = flat_read_data(dtbuf, proplen);
+scripts/dtc/flattree.c:743:static struct node *unflatten_tree(struct inbuf *dtbuf,
+scripts/dtc/flattree.c:753:	flatname = flat_read_string(dtbuf);
+scripts/dtc/flattree.c:764:		val = flat_read_word(dtbuf);
+scripts/dtc/flattree.c:770:			prop = flat_read_property(dtbuf, strbuf, flags);
+scripts/dtc/flattree.c:775:			child = unflatten_tree(dtbuf,strbuf, flatname, flags);
+scripts/dtc/flattree.c:813:	struct inbuf dtbuf, strbuf;
+scripts/dtc/flattree.c:913:	inbuf_init(&dtbuf, blob + off_dt, blob + totalsize);
+scripts/dtc/flattree.c:917:	val = flat_read_word(&dtbuf);
+scripts/dtc/flattree.c:922:	tree = unflatten_tree(&dtbuf, &strbuf, "", flags);
+scripts/dtc/flattree.c:924:	val = flat_read_word(&dtbuf);

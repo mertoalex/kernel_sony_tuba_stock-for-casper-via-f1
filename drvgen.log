@@ -1,0 +1,3 @@
+scripts/drvgen/drvgen.mk:25:DRVGEN_FILE_LIST := $(addprefix $(DRVGEN_OUT)/,$(ALL_DRVGEN_FILE))
+scripts/drvgen/drvgen.mk:27:DRVGEN_FILE_LIST :=
+scripts/drvgen/drvgen.mk:32:drvgen: $(DRVGEN_FILE_LIST)
